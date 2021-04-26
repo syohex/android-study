@@ -6,4 +6,5 @@
     <string name="in_minutes">IN MINUTES</string>
     <string name="age">AGE</string>
     <string name="calculate_your">CALCULATE YOUR</string>
+    <string name="age_in_days">Age in Days</string>
 </resources>

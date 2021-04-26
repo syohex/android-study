@@ -63,7 +63,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tvSelectedDateInMinute"
+        android:id="@+id/tvSelectedDateInMinutes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
@@ -74,6 +74,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/age_in_minutes"
+        android:textColor="@color/lightGreyTextColor"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvSelectedDateInDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:textColor="#844046"
+        android:textSize="35sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/age_in_days"
         android:textColor="@color/lightGreyTextColor"
         android:textSize="18sp" />
 
