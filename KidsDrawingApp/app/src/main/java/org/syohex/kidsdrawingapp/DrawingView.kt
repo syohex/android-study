@@ -7,7 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
-import android.util.Log
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 
@@ -19,6 +19,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
     private var brushSize: Float = 0.0f
     private var color = Color.BLACK
     private var canvas: Canvas? = null
+    private val paths = ArrayList<CustomPath>()
 
     init {
         setUpDrawing()
@@ -45,10 +46,10 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         super.onDraw(canvas)
         canvas.drawBitmap(canvasBitmap!!, 0.0f, 0.0f, canvasPaint)
 
-        if (!drawPath!!.isEmpty) {
-            drawPaint!!.strokeWidth = drawPath!!.brushThickness
-            drawPaint!!.color = drawPath!!.color
-            canvas.drawPath(drawPath!!, drawPaint!!)
+        for (path in paths) {
+            drawPaint!!.strokeWidth = path.brushThickness
+            drawPaint!!.color = path.color
+            canvas.drawPath(path, drawPaint!!)
         }
     }
 
@@ -71,6 +72,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
                 }
             }
             MotionEvent.ACTION_UP -> {
+                paths.add(drawPath!!)
                 drawPath = CustomPath(color, brushSize)
             }
             else -> return false
@@ -78,6 +80,15 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
 
         invalidate()
         return true
+    }
+
+    fun setSizeForBrush(newSize: Float) {
+        brushSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            newSize,
+            resources.displayMetrics
+        )
+        drawPaint!!.strokeWidth = brushSize
     }
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {
